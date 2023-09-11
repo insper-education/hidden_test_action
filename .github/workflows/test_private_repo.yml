@@ -3,7 +3,7 @@ name: Test Both Repos
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   VISIBLE:
