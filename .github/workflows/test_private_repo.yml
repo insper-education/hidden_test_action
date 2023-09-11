@@ -34,6 +34,9 @@ jobs:
         token: ${{ secrets.INSPER_BOT }}
         path: hidden_test
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3    
+
     - name: Install dependencies
       run: |
         pip install pytest
