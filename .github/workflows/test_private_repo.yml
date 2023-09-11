@@ -39,4 +39,6 @@ jobs:
         pip install pytest
 
     - name: Run pytest from private repo
-      run: pytest hidden_test/hidden.py
+      run: |
+        export PYTHONPATH=$PYTHONPATH:$(pwd)
+        pytest hidden_test/hidden.py
