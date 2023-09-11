@@ -1,0 +1,42 @@
+name: Test Both Repos
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  VISIBLE:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout public repo
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        pip install pytest
+
+    - name: Run pytest from public repo
+      run: pytest visible.py
+
+  HIDDEN:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout public repo (for shared code)
+      uses: actions/checkout@v2
+
+    - name: Checkout private repo
+      uses: actions/checkout@v2
+      with:
+        repository: insper-education/hidden_test
+        token: ${{ secrets.INSPER_BOT }}
+        path: hidden_test
+
+    - name: Install dependencies
+      run: |
+        pip install pytest
+
+    - name: Run pytest from private repo
+      run: pytest hidden_test/hidden.py
