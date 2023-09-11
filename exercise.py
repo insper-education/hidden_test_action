@@ -1,2 +1,2 @@
 def hidden_number():
-    return 42
+    return 1
