@@ -33,6 +33,8 @@ jobs:
         repository: insper-education/hidden_test
         token: ${{ secrets.INSPER_BOT }}
         path: hidden_test
+    - name: Write OpenAI secret key to config
+      run: echo "INSPER_BOT=${{ secrets.INSPER_BOT }}" > openai_config.txt
 
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3    
