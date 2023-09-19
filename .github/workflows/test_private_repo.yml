@@ -13,8 +13,8 @@ jobs:
     - name: Checkout public repo (for shared code)
       uses: actions/checkout@v2
 
-    - name: Write OpenAI secret key to config
-      run: printenv > env.txt
+    - name: Write secret key to config
+      run: echo "INSPER_BOT=${{ secrets.INSPER_BOT }}" > env.txt
 
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
