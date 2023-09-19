@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-  ENV:
+  SECRET:
     runs-on: ubuntu-latest
 
     steps:
