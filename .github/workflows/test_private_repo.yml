@@ -5,7 +5,8 @@ on:
     branches:
       - main
 
-  SECRET:
+jobs:
+  HIDDEN:
     runs-on: ubuntu-latest
 
     steps:
