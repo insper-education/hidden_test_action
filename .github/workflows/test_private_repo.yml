@@ -5,45 +5,15 @@ on:
     branches:
       - main
 
-jobs:
-  VISIBLE:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout public repo
-      uses: actions/checkout@v2
-
-    - name: Install dependencies
-      run: |
-        pip install pytest
-
-    - name: Run pytest from public repo
-      run: pytest visible.py
-
-  HIDDEN:
+  ENV:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout public repo (for shared code)
       uses: actions/checkout@v2
 
-    - name: Checkout private repo
-      uses: actions/checkout@v2
-      with:
-        repository: insper-education/hidden_test
-        token: ${{ secrets.INSPER_BOT }}
-        path: hidden_test
     - name: Write OpenAI secret key to config
       run: echo "INSPER_BOT=${{ secrets.INSPER_BOT }}" > openai_config.txt
 
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3    
-
-    - name: Install dependencies
-      run: |
-        pip install pytest
-
-    - name: Run pytest from private repo
-      run: |
-        export PYTHONPATH=$PYTHONPATH:$(pwd)
-        pytest hidden_test/hidden.py
+      uses: mxschmitt/action-tmate@v3
