@@ -6,15 +6,27 @@ on:
       - main
 
 jobs:
-  HIDDEN:
+  VISIBLE:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout public repo (for shared code)
+    - name: Checkout public repo
       uses: actions/checkout@v2
 
-    - name: Write secret key to config
-      run: echo "ANSWER=${{ secrets.ANSWER }}" > env.txt
+    - name: Install dependencies
+      run: |
+        pip install pytest
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    - name: Run pytest from public repo
+      run: pytest visible.py
+
+  HIDDEN:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger workflow in central-repo
+      run: |
+        gh api repos/central-repo-owner/central-repo/dispatches \
+          --header "Accept: application/vnd.github.v3+json" \
+          --raw-field event_type=run-pytest
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
