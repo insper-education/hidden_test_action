@@ -29,4 +29,4 @@ jobs:
           --header "Accept: application/vnd.github.v3+json" \
           --raw-field event_type=run-pytest
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
