@@ -23,9 +23,9 @@ jobs:
   HIDDEN:
     runs-on: ubuntu-latest
     steps:
-    - name: Trigger workflow in hidden_test_action
+    - name: Trigger workflow in hidden_test
       run: |
-        gh api repos/insper-education/hidden_test_action/dispatches \
+        gh api repos/insper-education/hidden_test/dispatches \
           --header "Accept: application/vnd.github.v3+json" \
           --raw-field event_type=run-pytest
       env:
